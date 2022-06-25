@@ -8,7 +8,7 @@ import Card from '../components/card'
 
 export async function getServerSideProps(context){
 
-  const res = await fetch(`/api/todo/get`)
+  const res = await fetch('https://todo-app-simple-next-js.vercel.app/api/todo/get')
   const data = await res.json()
 
   return {
@@ -21,12 +21,12 @@ export async function getServerSideProps(context){
 
 export default function Home({todos}) {
 
+
   const [heading, setHeading] = React.useState();
   const [description, setDescription] = React.useState();
   const [error, setError] = React.useState();
   const [status, setStatus] = React.useState();
-  const router = useRouter()
-;
+  const router = useRouter();
 
   const handlePost = async (e) => {
 
@@ -47,7 +47,7 @@ export default function Home({todos}) {
 
     console.log(post);
 
-    const res = await fetch(`/api/todo/create`, {
+    const res = await fetch('https://todo-app-simple-next-js.vercel.app//api/todo/create', {
       method: "POST",
       body: JSON.stringify(post),
       headers : { 
