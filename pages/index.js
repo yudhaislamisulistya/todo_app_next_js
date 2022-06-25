@@ -6,7 +6,7 @@ import Card from '../components/card'
 
 
 
-export async function getStaticProps(context){
+export async function getServerProps(context){
 
   const dev = process.env.NODE_ENV !== 'production'
   const { DEV_URL, PROD_URL } = process.env
