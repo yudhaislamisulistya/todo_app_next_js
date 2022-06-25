@@ -30,11 +30,11 @@ const Card = ({todo, url}) => {
             <h4 className="card-title">{heading}</h4>
             <p className="card-text">{description}</p>
             <span className="badge badge-info mr-2">Edit</span>
-            {/* <button
+            <button
                 className="btn btn-danger btn-sm"
                 onClick={() => deleteTodo(todo._id)}>
             {deleting ? 'Deleting...' : 'Delete'}
-            </button> */}
+            </button>
             </div>
         </div>
     )
