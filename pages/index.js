@@ -25,11 +25,42 @@ export async function getServerSideProps(context){
 export default function Home({todos, url}) {
 
 
+  const [_id, set_Id] = React.useState('')
   const [heading, setHeading] = React.useState();
   const [description, setDescription] = React.useState();
   const [error, setError] = React.useState();
   const [status, setStatus] = React.useState();
+  const [update, setUpdate] = React.useState();
   const router = useRouter();
+
+  const updateHandler = async (_id) => {
+    const res = await fetch(`${url}/api/todo/update`, {
+      method: "PUT",
+      body: JSON.stringify({ _id, heading, description }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    const data = await res.json()
+    if (data.status === 'success') {
+      setStatus(data.status)
+      setUpdate('')
+      setHeading('');
+      setDescription('');
+      setError('');
+      router.push('/')
+    } else {
+      setError(data.message)
+    }
+  }
+  const resetAction = () => {
+    setHeading('');
+    setDescription('');
+    setError('');
+    setStatus('');
+    setUpdate('');
+  }
 
   const handlePost = async (e) => {
 
@@ -37,6 +68,7 @@ export default function Home({todos, url}) {
 
     setError('')
     setStatus('')
+    setUpdate('')
 
     if(!heading || !description){
       return setError('Require Heading and Description')
@@ -70,6 +102,7 @@ export default function Home({todos, url}) {
     }
   }
 
+
   return (
     <Fragment>
       <Head>
@@ -96,13 +129,18 @@ export default function Home({todos, url}) {
             <input type="text" name='description' value={description} className="form-control" placeholder="Description" aria-describedby="helpId" onChange={(e) => setDescription(e.target.value)}/>
           </div>
           <div className="form-group">
-            <button type='submit' className="btn btn-primary">Add Todo</button>
+            {!update ? <button type='submit' className="btn btn-primary">Add Todo</button> : null}
           </div>
         </form>
+        {update ? <div>
+                      <button className="btn btn-success mr-2" onClick={() => updateHandler(_id)}>Update Data</button>
+                      <button className='btn btn-secondary' onClick={() => resetAction()}>Reset</button>
+                  </div> : null}
       </div>
       <div className='container'>
-        {todos.map(todo => (
-          <Card key={todo._id} todo={todo} url={url}/>
+        { todos.length == 0 ? <div className='text-center h1'>Data Tidak Tersedia</div> :  
+        todos.map(todo => (
+          <Card key={todo._id} todo={todo} url={url} setHeading={setHeading} setDescription={setDescription} setUpdate={setUpdate} set_Id={set_Id}/>
         ))}
       </div>
     </Fragment>
