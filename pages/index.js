@@ -8,10 +8,7 @@ import Card from '../components/card'
 
 export async function getServerSideProps(context){
 
-  const dev = process.env.NODE_ENV !== 'production'
-  const { DEV_URL, PROD_URL } = process.env
-
-  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/todo/get`)
+  const res = await fetch(`/api/todo/get`)
   const data = await res.json()
 
   return {
