@@ -3,12 +3,13 @@ import { useRouter } from 'next/router'
 import React, { Fragment } from 'react'
 import Card from '../components/card'
 
-const dev = process.env.NODE_ENV !== 'production'
-const { DEV_URL, PROD_URL } = process.env
+
 
 
 export async function getServerSideProps(context){
 
+  const dev = process.env.NODE_ENV !== 'production'
+  const { DEV_URL, PROD_URL } = process.env
 
 
   const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/todo/get`)
@@ -17,12 +18,13 @@ export async function getServerSideProps(context){
   return {
       props: {
           todos: data.data,
+          url: dev ? DEV_URL : PROD_URL,
       }
   }
 }
 
 
-export default function Home({todos}) {
+export default function Home({todos, url}) {
 
 
   const [heading, setHeading] = React.useState();
@@ -48,13 +50,8 @@ export default function Home({todos}) {
       createdAt: new Date().toISOString()
     }
 
-    if(dev){
-      URL = process.env.DEV_URL
-    }else{
-      URL = process.env.PROD_URL
-    }
 
-    const res = await fetch(`${URL}/api/todo/create`, {
+    const res = await fetch(`${url}/api/todo/create`, {
       method: "POST",
       body: JSON.stringify(post),
       headers : { 
