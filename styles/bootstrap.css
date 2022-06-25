@@ -77,6 +77,10 @@ body {
 }
 
 hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1);
     box-sizing: content-box;
     height: 0;
     overflow: visible
@@ -100,7 +104,6 @@ p {
 abbr[data-original-title],
 abbr[title] {
     text-decoration: underline;
-    -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
     cursor: help;
     border-bottom: 0;
@@ -443,13 +446,6 @@ h6 {
     line-height: 1.2
 }
 
-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 1px solid rgba(0, 0, 0, .1)
-}
-
 .small,
 small {
     font-size: 80%;
@@ -550,12 +546,6 @@ kbd kbd {
     padding: 0;
     font-size: 100%;
     font-weight: 700
-}
-
-pre {
-    display: block;
-    font-size: 87.5%;
-    color: #212529
 }
 
 pre code {
@@ -3749,10 +3739,6 @@ input[type=submit].btn-block {
     margin-left: 0
 }
 
-.dropright .dropdown-toggle::after {
-    vertical-align: 0
-}
-
 .dropleft .dropdown-menu {
     top: 0;
     right: 100%;
@@ -3768,10 +3754,6 @@ input[type=submit].btn-block {
     content: ""
 }
 
-.dropleft .dropdown-toggle::after {
-    display: none
-}
-
 .dropleft .dropdown-toggle::before {
     display: inline-block;
     margin-right: .255em;
@@ -3784,10 +3766,6 @@ input[type=submit].btn-block {
 
 .dropleft .dropdown-toggle:empty::after {
     margin-left: 0
-}
-
-.dropleft .dropdown-toggle::before {
-    vertical-align: 0
 }
 
 .dropdown-menu[x-placement^=bottom],
@@ -5125,16 +5103,6 @@ input[type=submit].btn-block {
     justify-content: flex-start
 }
 
-.navbar-expand>.container,
-.navbar-expand>.container-fluid,
-.navbar-expand>.container-lg,
-.navbar-expand>.container-md,
-.navbar-expand>.container-sm,
-.navbar-expand>.container-xl {
-    padding-right: 0;
-    padding-left: 0
-}
-
 .navbar-expand .navbar-nav {
     -ms-flex-direction: row;
     flex-direction: row
@@ -5558,9 +5526,6 @@ input[type=submit].btn-block {
     text-decoration: underline
 }
 
-.breadcrumb-item+.breadcrumb-item:hover::before {
-    text-decoration: none
-}
 
 .breadcrumb-item.active {
     color: #6c757d
@@ -11433,10 +11398,6 @@ a.text-dark:hover {
     }
 
     blockquote,
-    pre {
-        border: 1px solid #adb5bd;
-        page-break-inside: avoid
-    }
 
     img,
     tr {
