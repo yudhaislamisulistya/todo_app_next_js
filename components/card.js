@@ -1,14 +1,24 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
 
-const Card = ({todo, url}) => {
+const Card = ({todo, url, setHeading, setDescription, setUpdate, set_Id}) => {
     const { heading, description } = todo
     const [deleting, setDeleting] = useState()
     const router = useRouter()
 
+    // Get Todo By Id
+    const getTodoById = async () => {
+        const id = todo._id
+        const res = await fetch(`${url}/api/todo/${id}`)
+        const data = await res.json()
+        setHeading(data.data.heading)
+        setDescription(data.data.description)
+        setUpdate(data.status)
+        set_Id(todo._id)
+        return data.data
+    }
     // Delete Todo
     const deleteTodo = async () => {
-        console.log(todo._id);
         setDeleting(true)
         const res = await fetch(`${url}/api/todo/delete`, {
             method: "DELETE",
@@ -30,7 +40,10 @@ const Card = ({todo, url}) => {
                 halo
             <h4 className="card-title">{heading}</h4>
             <p className="card-text">{description}</p>
-            <span className="badge badge-info mr-2">Edit</span>
+            <button className="btn btn-info btn-sm mr-2"
+                onClick={() => getTodoById(todo._id)}>
+                Edit
+            </button>
             <button
                 className="btn btn-danger btn-sm"
                 onClick={() => deleteTodo(todo._id)}>
