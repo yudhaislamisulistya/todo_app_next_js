@@ -5,7 +5,7 @@ export default async function handler(req, resp){
         resp.status(403).send('Method Not Allowed')
         return
     }
-
+    // Halo
     try {
         const { db } = await connect()
         const todos = await db

@@ -6,7 +6,7 @@ import Card from '../components/card'
 
 
 
-export async function getServerSideProps(context){
+export async function getStaticProps(context){
 
   const dev = process.env.NODE_ENV !== 'production'
   const { DEV_URL, PROD_URL } = process.env
@@ -104,7 +104,7 @@ export default function Home({todos, url}) {
       </div>
       <div className='container'>
         {todos.map(todo => (
-          <Card key={todo._id} todo={todo} />
+          <Card key={todo._id} todo={todo} url={url}/>
         ))}
       </div>
     </Fragment>
