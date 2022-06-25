@@ -1,14 +1,17 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { Fragment } from 'react'
 import Card from '../components/card'
 
+const dev = process.env.NODE_ENV !== 'production'
+const { DEV_URL, PROD_URL } = process.env
 
 
 export async function getServerSideProps(context){
 
-  const res = await fetch('api/todo/get')
+
+
+  const res = await fetch(`${dev ? DEV_URL : PROD_URL}/api/todo/get`)
   const data = await res.json()
 
   return {
@@ -45,9 +48,13 @@ export default function Home({todos}) {
       createdAt: new Date().toISOString()
     }
 
-    console.log(post);
+    if(dev){
+      URL = process.env.DEV_URL
+    }else{
+      URL = process.env.PROD_URL
+    }
 
-    const res = await fetch('/api/todo/create', {
+    const res = await fetch(`${URL}/api/todo/create`, {
       method: "POST",
       body: JSON.stringify(post),
       headers : { 
