@@ -6,9 +6,6 @@ const Card = ({todo, url}) => {
     const [deleting, setDeleting] = useState()
     const router = useRouter()
 
-    console.log(todo);
-    console.log(url);
-
     // Delete Todo
     const deleteTodo = async () => {
         console.log(todo._id);

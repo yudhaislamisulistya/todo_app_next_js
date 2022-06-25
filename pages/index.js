@@ -4,9 +4,7 @@ import React, { Fragment } from 'react'
 import Card from '../components/card'
 
 
-
-
-export async function getServerProps(context){
+export async function getServerSideProps(context){
 
   const dev = process.env.NODE_ENV !== 'production'
   const { DEV_URL, PROD_URL } = process.env
