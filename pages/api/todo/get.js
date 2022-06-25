@@ -11,10 +11,11 @@ export default async function handler(req, resp){
         const todos = await db
             .collection("todos")
             .find({})
+            .sort({'_id': -1})
             .toArray();
 
         resp.status(200).json({
-            todos: todos,
+            data: todos,
             status: 'success',
             code: 200
         })
