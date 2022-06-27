@@ -37,7 +37,6 @@ const Card = ({todo, url, setHeading, setDescription, setUpdate, set_Id}) => {
     return(
         <div className="card text-left mt-2">
             <div className="card-body">
-                halo
             <h4 className="card-title">{heading}</h4>
             <p className="card-text">{description}</p>
             <button className="btn btn-info btn-sm mr-2"
